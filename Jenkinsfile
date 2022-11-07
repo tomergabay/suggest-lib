@@ -8,13 +8,13 @@ pipeline {
             sh 'echo deploy'
         }
     }
-    stage('deploy to staging') {
+    stage('2') {
         when { branch "feature/*" }
         steps {
             sh 'echo psuhed to feture branch'
         }
     }
-        stage('deploy to staging') {
+        stage('d3eploy to staging') {
         when { branch "release/*" }
         steps {
             sh 'echo pushed to release beanch'
