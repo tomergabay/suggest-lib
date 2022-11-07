@@ -1,6 +1,8 @@
 pipeline {
   agent any
-
+  tools {
+      maven "maven"
+  }
   stages {
     stage ('STAGE 1 calculate and set version') {
       when { branch "release/*" }
