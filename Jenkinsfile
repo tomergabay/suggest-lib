@@ -25,7 +25,6 @@ pipeline {
     stage ('STAGE 2 build & test') {
       steps {
         sh "java -version"
-        sh "which mvn"
         sh "mvn verify"
       }
     }
