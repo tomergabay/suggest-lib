@@ -1,0 +1,58 @@
+services:
+
+  jenkins:
+    image: jenkins_aws:latest
+    container_name: jenkins_server
+    restart: always
+    ports:
+      - 8080:8080
+      - 50000:50000
+    depends_on:
+      - gitlab
+    volumes:
+      - .ssh:/root/.ssh
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - my_net
+
+
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab_server
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - gitlab_config:/etc/gitlab
+      - gitlab_logs:/var/log/gitlab
+      - gitlab_data:/var/opt/gitlab
+    networks:
+      - my_net
+  
+  artifactory:
+    image: docker.bintray.io/jfrog/artifactory-oss:6.23.13
+    container_name: artifactory
+    restart: always
+    depends_on: 
+      - jenkins
+    ports: 
+     - 8081:8081
+    volumes: 
+     - artifactory_data:/var/opt/jfrog/artifactory
+    networks:
+      - my_net
+
+
+networks:
+    my_net:
+
+volumes:
+  m2repo:
+  jenkins_home:
+  gitlab_config:
+  gitlab_logs:
+  gitlab_data:
+  .ssh:
+  artifactory_data:
