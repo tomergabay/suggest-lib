@@ -19,7 +19,7 @@ pipeline {
               new_tag = 0
           }
           new_version = "${majorMinor}.${new_tag}"
-          sh "mvn versions:set -DnewVersion=${newversion}"
+          sh "mvn versions:set -DnewVersion=${new_version}"
         }
       }
     }
