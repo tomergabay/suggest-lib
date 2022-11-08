@@ -16,7 +16,7 @@ pipeline {
             echo "${new_tag}"
             new_tag += 1
           } catch (Exception e) {
-            new_tag = 0
+              new_tag = 0
           }
           new_version = "${majorMinor}.${new_tag}"
           sh "mvn versions:set -DnewVersion=${newversion}"
