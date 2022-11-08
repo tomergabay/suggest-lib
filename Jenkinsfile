@@ -7,6 +7,8 @@ pipeline {
     stage ('STAGE 1 calculate and set version') {
       when { branch "release/*" }
       steps {
+        sh 'git config --global user.email "tomer@git.com"'
+        sh 'git config --global user.name "tomer"'
         sh 'git fetch --tags'
 
         script {
